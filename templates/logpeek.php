@@ -8,6 +8,7 @@ $this->includeAtTemplateBase('includes/header.php');
 <?= $this->data['error'] ?>
 <form method="get" action="?">
 	<table>
+        <tr><th><label for="start">Logfile</label></th><td id="logf"><?php echo $this->data['logfile']; ?></td></tr>
 		<tr><th><label for="start">First entry in logfile</label></th><td id="star"><?php echo $this->data['timestart']; ?></td></tr>
 		<tr><th><label for="end">Last entry in logfile</label></th><td id="end"><?php echo $this->data['endtime']; ?></td></tr>
 		<tr><th><label for="size">Logfile size</label></th><td id="size"><?php echo $this->data['filesize']; ?></td></tr>

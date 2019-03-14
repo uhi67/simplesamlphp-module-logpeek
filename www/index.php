@@ -55,7 +55,7 @@ $logfile = $logpeekconfig->getValue('logfile', '/var/simplesamlphp.log');
 $blockSize = $logpeekconfig->getValue('blocksz', 8192);
 
 $myLog = new sspmod_logpeek_File_reverseRead($logfile, $blockSize);
-
+if(!$myLog) throw new Exception("Cannot open stream '$fileUrl'");
 
 $results = NULL;
 $tag = $session->getTrackID();
@@ -87,4 +87,5 @@ $t->data['trackid'] = $tag;
 $t->data['timestart'] = date(DATE_RFC822, $firstTimeEpoch);
 $t->data['endtime'] = date(DATE_RFC822, $lastTimeEpoch);
 $t->data['filesize'] = $fileSize;
+$t->data['logfile'] = $logfile;
 $t->show();
