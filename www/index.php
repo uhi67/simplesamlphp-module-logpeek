@@ -2,7 +2,7 @@
 
 function logFilter($objFile, $tag, $cut){
 	if (!preg_match('/^[a-f0-9]{10}$/D', $tag)) throw new Exception('Invalid search tag');
-	
+
 	$i = 0;
 	$results = array();
 	$line = $objFile->getPreviousLine();
@@ -20,10 +20,35 @@ function logFilter($objFile, $tag, $cut){
 
 $config = SimpleSAML_Configuration::getInstance();
 $session = SimpleSAML_Session::getSessionFromRequest();
-
-SimpleSAML\Utils\Auth::requireAdmin();
-
 $logpeekconfig = SimpleSAML_Configuration::getConfig('module_logpeek.php');
+$requireAdmin = $logpeekconfig->getValue('requireAdmin', true);
+$requireAuth = $logpeekconfig->getValue('requireAuth', false);
+
+if($requireAdmin) SimpleSAML\Utils\Auth::requireAdmin();
+
+$authorized = true;
+if($requireAuth) {
+	$as = new \SimpleSAML_Auth_Simple($requireAuth);
+	if(!$as->isAuthenticated()) $as->requireAuth();
+	$attributes = $as->getAttributes();
+	$requiredAttrs = $logpeekconfig->getValue('requiredAttrs', []);
+
+	foreach($requiredAttrs as $name=>$value) {
+		$attrValues = isset($attributes[$name]) ? $attributes[$name] : array();
+		if(!is_array($attrValues)) $attrValues = array($attrValues);
+		$hasValue = false;
+		foreach($attrValues as $av) {
+			if(preg_match('/^~[^~]*~$/', $value)) $hasValue = preg_match($value, $av);
+			else $hasValue = $value == $av;
+			if($hasValue) break;
+		}
+		if(!$hasValue) {
+			$authorized = false;
+			SimpleSAML\Utils\Auth::requireAdmin();
+		}
+	}
+}
+
 $logfile = $logpeekconfig->getValue('logfile', '/var/simplesamlphp.log');
 $blockSize = $logpeekconfig->getValue('blocksz', 8192);
 
@@ -49,5 +74,4 @@ $t->data['trackid'] = $session->getTrackID();
 $t->data['timestart'] = date(DATE_RFC822, $firstTimeEpoch);
 $t->data['endtime'] = date(DATE_RFC822, $lastTimeEpoch);
 $t->data['filesize'] = $fileSize;
-
 $t->show();

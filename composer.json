@@ -11,6 +11,10 @@
         {
             "name": "Olav Morken",
             "email": "olav.morken@uninett.no"
+        },
+        {
+            "name": "Uherkovich Péter",
+            "email": "uherkovich.peter@pte.hu"
         }
     ],
     "require": {
