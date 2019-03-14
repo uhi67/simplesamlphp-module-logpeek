@@ -30,9 +30,8 @@ class sspmod_logpeek_File_reverseRead{
 	 * @return bool Success
 	 */
 	public function __construct($fileUrl, $blockSize = 8192){
-		if(!is_readable($fileUrl)){
-			throw new Exception("Cannot open file '$fileUrl'");
-		}
+		if(!file_exists($fileUrl)) throw new Exception("File does not exist: '$fileUrl'");
+		if(!is_readable($fileUrl)) throw new Exception("Cannot read file '$fileUrl'");
 
 		$this->blockSize = $blockSize;
 		$this->content = array();
@@ -47,7 +46,7 @@ class sspmod_logpeek_File_reverseRead{
 			$this->fileHandle = fopen($fileUrl, 'rb');
 			if(!$this->fileHandle) throw new Exception("Cannot open file '$fileUrl'");
 		} else {
-			throw new Exception("Cannot open file '$fileUrl'");
+			throw new Exception("File is zero length: '$fileUrl'");
 		}
 	}
 
