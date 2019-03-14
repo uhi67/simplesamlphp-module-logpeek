@@ -1,7 +1,9 @@
 <?php
 
 function logFilter($objFile, $tag, $cut){
-	if (!preg_match('/^[a-f0-9]{10}$/D', $tag)) throw new Exception('Invalid search tag');
+	if (!preg_match('/^[a-f0-9]{10}$/D', $tag)) {
+		$error = '<div class="alert-danger">Invalid search tag! Search tag must be exactly 10 characters long hexadecimal number.</div>';
+	}
 
 	$i = 0;
 	$results = array();
@@ -57,8 +59,17 @@ $myLog = new sspmod_logpeek_File_reverseRead($logfile, $blockSize);
 
 $results = NULL;
 $tag = $session->getTrackID();
+
 if (isset($_REQUEST['tag'])) {
-	$results = logFilter($myLog, $tag = $_REQUEST['tag'], $logpeekconfig->getValue('lines', 500));
+	$tag = $_REQUEST['tag'];
+	if (!preg_match('/^[a-f0-9]{10}$/D', $tag)) {
+		$error = '<div class="alert-danger">Invalid search tag! Search tag must be exactly 10 characters long hexadecimal number.</div>';
+		$results = array();
+	}
+	else {
+		$error = '';
+		$results = logFilter($myLog, $tag, $logpeekconfig->getValue('lines', 500));
+	}
 }
 
 
@@ -70,6 +81,7 @@ $lastTimeEpoch = sspmod_logpeek_Syslog_parseLine::getUnixTime($lastLine, $fileMo
 $fileSize = $myLog->getFileSize();
 
 $t = new SimpleSAML_XHTML_Template($config, 'logpeek:logpeek.php');
+$t->data['error'] = $error;
 $t->data['results'] = $results;
 $t->data['trackid'] = $tag;
 $t->data['timestart'] = date(DATE_RFC822, $firstTimeEpoch);

@@ -5,6 +5,7 @@ $this->includeAtTemplateBase('includes/header.php');
 
 <h2>SimpleSAMLphp logs (admin utility)</h2>
 
+<?= $this->data['error'] ?>
 <form method="get" action="?">
 	<table>
 		<tr><th><label for="start">First entry in logfile</label></th><td id="star"><?php echo $this->data['timestart']; ?></td></tr>
