@@ -56,8 +56,9 @@ $myLog = new sspmod_logpeek_File_reverseRead($logfile, $blockSize);
 
 
 $results = NULL;
+$tag = $session->getTrackID();
 if (isset($_REQUEST['tag'])) {
-	$results = logFilter($myLog, $_REQUEST['tag'], $logpeekconfig->getValue('lines', 500));
+	$results = logFilter($myLog, $tag = $_REQUEST['tag'], $logpeekconfig->getValue('lines', 500));
 }
 
 
@@ -70,7 +71,7 @@ $fileSize = $myLog->getFileSize();
 
 $t = new SimpleSAML_XHTML_Template($config, 'logpeek:logpeek.php');
 $t->data['results'] = $results;
-$t->data['trackid'] = $session->getTrackID();
+$t->data['trackid'] = $tag;
 $t->data['timestart'] = date(DATE_RFC822, $firstTimeEpoch);
 $t->data['endtime'] = date(DATE_RFC822, $lastTimeEpoch);
 $t->data['filesize'] = $fileSize;
