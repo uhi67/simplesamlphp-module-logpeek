@@ -1,5 +1,5 @@
 {
-    "name": "simplesamlphp/simplesamlphp-module-logpeek",
+    "name": "uhi67/simplesamlphp-module-logpeek",
     "description": "A SimpleSAMLphp module to provide a web API to access the log files.",
     "type": "simplesamlphp-module",
     "keywords": [ "simplesamlphp", "modules" ],
@@ -21,4 +21,3 @@
         "simplesamlphp/composer-module-installer": "~1.0"
     }
 }
-
