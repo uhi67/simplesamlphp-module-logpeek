@@ -1,8 +1,14 @@
 <?php
 
+/**
+ * @param $objFile
+ * @param $tag
+ * @param $cut
+ * @return array|string -- array on success, string (error message) on failure
+ */
 function logFilter($objFile, $tag, $cut){
 	if (!preg_match('/^[a-f0-9]{10}$/D', $tag)) {
-		$error = '<div class="alert-danger">Invalid search tag! Search tag must be exactly 10 characters long hexadecimal number.</div>';
+		return '<div class="alert-danger">Invalid search tag! Search tag must be exactly 10 characters long hexadecimal number.</div>';
 	}
 
 	$i = 0;
@@ -20,17 +26,18 @@ function logFilter($objFile, $tag, $cut){
 }
 
 
-$config = SimpleSAML_Configuration::getInstance();
-$session = SimpleSAML_Session::getSessionFromRequest();
-$logpeekconfig = SimpleSAML_Configuration::getConfig('module_logpeek.php');
+$config = SimpleSAML\Configuration::getInstance();
+$session = SimpleSAML\Session::getSessionFromRequest();
+$logpeekconfig = SimpleSAML\Configuration::getConfig('module_logpeek.php');
 $requireAdmin = $logpeekconfig->getValue('requireAdmin', true);
 $requireAuth = $logpeekconfig->getValue('requireAuth', false);
 
 if($requireAdmin) SimpleSAML\Utils\Auth::requireAdmin();
 
+$error = '';
 $authorized = true;
 if($requireAuth) {
-	$as = new \SimpleSAML_Auth_Simple($requireAuth);
+	$as = new SimpleSAML\Auth\Simple($requireAuth);
 	if(!$as->isAuthenticated()) $as->requireAuth();
 	$attributes = $as->getAttributes();
 	$requiredAttrs = $logpeekconfig->getValue('requiredAttrs', []);
@@ -55,7 +62,7 @@ $logfile = $logpeekconfig->getValue('logfile', '/var/simplesamlphp.log');
 $blockSize = $logpeekconfig->getValue('blocksz', 8192);
 
 $myLog = new sspmod_logpeek_File_reverseRead($logfile, $blockSize);
-if(!$myLog) throw new Exception("Cannot open stream '$fileUrl'");
+if(!$myLog) throw new Exception("Cannot open stream '$logfile'");
 
 $results = NULL;
 $tag = $session->getTrackID();
@@ -69,6 +76,10 @@ if (isset($_REQUEST['tag'])) {
 	else {
 		$error = '';
 		$results = logFilter($myLog, $tag, $logpeekconfig->getValue('lines', 500));
+		if(!is_array($results)) {
+			$error = $results;
+			$results = [];
+		}
 	}
 }
 
@@ -80,7 +91,7 @@ $lastLine = $myLog->getLastLine();
 $lastTimeEpoch = sspmod_logpeek_Syslog_parseLine::getUnixTime($lastLine, $fileModYear);
 $fileSize = $myLog->getFileSize();
 
-$t = new SimpleSAML_XHTML_Template($config, 'logpeek:logpeek.php');
+$t = new SimpleSAML\XHTML\Template($config, 'logpeek:logpeek.php');
 $t->data['error'] = $error;
 $t->data['results'] = $results;
 $t->data['trackid'] = $tag;
