@@ -20,3 +20,13 @@ want to use a stable version of the module.
 
 The module is enabled by default. If you want to disable the module once installed, you just need to create a file named
 `disable` in the `modules/logpeek/` directory inside your SimpleSAMLphp installation.
+
+Change log
+----------
+
+### 1.1 (2020-06-22)
+
+- Added authorization config parameters (see config-templates/module-logpeek.php)
+- Preserve last search tag
+- Detailed error display
+
