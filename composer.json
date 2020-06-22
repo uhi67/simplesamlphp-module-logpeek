@@ -17,6 +17,7 @@
             "email": "uherkovich.peter@pte.hu"
         }
     ],
+    "license": "GNU LESSER GENERAL PUBLIC LICENSE",
     "require": {
         "simplesamlphp/simplesamlphp": "^1.16.3",
         "simplesamlphp/composer-module-installer": "~1.0"
