@@ -9,7 +9,7 @@ $config = array (
 	// Read block size. 8192 is max, limited by fread.
 	'blocksz'	=> 8192,
 	'requireAdmin' => true, // default is true.
-	'requireAuth' => false, // default is false. Specify auht source if you want to require login
+	'requireAuth' => false, // default is false. Specify auth source if you want to require login
 	'requiredAttrs' => array(),    // default is empty. Required attribute values to use this module
 	/* Example
 	'requiredAttrs' => array(
