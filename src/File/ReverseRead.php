@@ -65,6 +65,7 @@ class ReverseRead
      *
      * @param string $fileUrl Path and filename to file to be read
      * @param int $blockSize File read block size in byte
+     * @throws Exception
      */
     public function __construct(string $fileUrl, int $blockSize = 8192)
     {
@@ -127,10 +128,8 @@ class ReverseRead
             return false;
         }
 
-        fseek($this->fileHandle, $this->blockStart, SEEK_SET);
-        $buff = fread($this->fileHandle, $splits);
-
-        return $buff;
+        fseek($this->fileHandle, $this->blockStart);
+        return fread($this->fileHandle, $splits);
     }
 
 
@@ -260,9 +259,9 @@ class ReverseRead
         }
 
         $seeker = $pos;
-        fseek($this->fileHandle, $seeker, SEEK_SET);
+        fseek($this->fileHandle, $seeker);
         while ($seeker > 0 && fgetc($this->fileHandle) !== "\n") {
-            fseek($this->fileHandle, --$seeker, SEEK_SET);
+            fseek($this->fileHandle, --$seeker);
         }
 
         return rtrim(fgets($this->fileHandle));

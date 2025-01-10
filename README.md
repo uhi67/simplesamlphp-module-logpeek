@@ -31,6 +31,10 @@ in `config.php`, search for the `module.enable` key and set `logpeek` to true:
 Change log
 ----------
 
+### 1.2 (2020-06-22)
+
+- SimpleSAMLphp 2.3 compatibility
+
 ### 1.1 (2020-06-22)
 
 - Added authorization config parameters (see config-templates/module-logpeek.php)

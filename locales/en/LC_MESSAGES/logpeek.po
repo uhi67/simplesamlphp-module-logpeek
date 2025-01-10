@@ -1,0 +1,23 @@
+msgid "Not authorized."
+msgstr "Not authorized."
+
+msgid "Invalid search tag! Search tag must be exactly 10 characters long hexadecimal number."
+msgstr "Invalid search tag! Search tag must be exactly 10 characters long hexadecimal number."
+
+msgid "First entry in logfile"
+msgstr "First entry in logfile"
+
+msgid "Last entry in logfile"
+msgstr "Last entry in logfile"
+
+msgid "Logfile"
+msgstr "Logfile"
+
+msgid "Logfile size"
+msgstr "Logfile size"
+
+msgid "Tag id for search"
+msgstr "Tag id for search"
+
+msgid "Back"
+msgstr "Back"

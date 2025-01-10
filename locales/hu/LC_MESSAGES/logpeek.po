@@ -1,0 +1,24 @@
+msgid "Not authorized."
+msgstr "A funkció használatához nincs joga."
+
+msgid "Invalid search tag! Search tag must be exactly 10 characters long hexadecimal number."
+msgstr "Érvénytelen keresési minta. A hibakódnak pontosan 10 hexa karakterből kell állnia."
+
+msgid "Tag id for search"
+msgstr "Keresett hibaazonosító"
+
+msgid "First entry in logfile"
+msgstr "Napló legrégebbi bejegyzése"
+
+msgid "Last entry in logfile"
+msgstr "Napló legfrissebb bejegyzése"
+
+msgid "Logfile"
+msgstr "Naplófájl helye"
+
+msgid "Logfile size"
+msgstr "Naplófájl mérete"
+
+msgid "Back"
+msgstr "Vissza"
+

@@ -10,4 +10,17 @@ $config = [
 
     // Read block size. 8192 is max, limited by fread.
     'blocksz' => 8192,
+
+    'backUrl' => '/', // The return url for the 'Back' button on the filter page.
+
+    // Authorization settings
+	'requireAdmin' => true, // default is true.
+	'requireAuth' => false, // default is false. Specify auth source if you want to require login
+	'requiredAttrs' => array(),    // default is empty. Attribute values required to use the module
+	/* Example
+	'requiredAttrs' => array(
+		'eduPersonScopedAffiliation' => 'employee@pte.hu',
+		'ou' => '~KA IIG~', // ~~ indicates regex match
+	),
+	 */
 ];

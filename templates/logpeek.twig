@@ -2,37 +2,56 @@
 {% extends "base.twig" %}
 
 {% block content %}
-<h2>SimpleSAMLphp logs (admin utility)</h2>
+    <h2>SimpleSAMLphp logs (admin utility)</h2>
 
-<form method="get" action="?">
-    <table>
-        <tr>
-            <th><label for="start">First entry in logfile</label></th>
-            <td id="star">{{ timestart }}</td>
-        </tr>
-        <tr>
-            <th><label for="end">Last entry in logfile</label></th>
-            <td id="end">{{ endtime }}</td>
-        </tr>
-        <tr>
-            <th><label for="size">Logfile size</label></th>
-            <td id="size">{{ filesize }} </td>
-        </tr>
-        <tr>
-            <th><label for="tag">Tag id for search</label></th>
-            <td><input type="text" name="tag" id="tag" value="{{ trackid }}" /></td>
-        </tr>
-        <tr>
-            <th><input type="submit" value="Search log" /></th>
-            <td></td>
-        </tr>
-    </table>
-</form>
+    {% if error!='' %}
+        <div class="alert alert-danger">{{ error|trans }}</div>
+    {% endif %}
+    {% if authorized %}
+        <form method="get" action="?">
+            <table class="table table-striped">
+                <tr>
+                    <th><label for="file">{{ 'Logfile' | trans }}</label></th>
+                    <td id="logf">{{ logfile }}</td>
+                </tr>
+                <tr>
+                    <th><label for="start">{{ 'First entry in logfile' | trans }}</label></th>
+                    <td id="star">{{ timestart | format_datetime('short', 'short', locale=currentLanguage) }}</td>
+                </tr>
+                <tr>
+                    <th><label for="end">{{ 'Last entry in logfile' | trans }}</label></th>
+                    <td id="end">{{ endtime | format_datetime('short', 'short', locale=currentLanguage) }}</td>
+                </tr>
+                <tr>
+                    <th><label for="size">{{ 'Logfile size' | trans }}</label></th>
+                    <td id="size">{{ filesize }} </td>
+                </tr>
+                <tr>
+                    <th><label for="tag">{{ 'Tag id for search' | trans }}</label></th>
+                    <td><input type="text" name="tag" id="tag" value="{{ trackid }}"/></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <input type="submit" class="btn btn-primary" value="Search log"/>
+                        {% if backUrl != '' %}
+                            <button type="button" class="btn btn-dark"><a href="{{ backUrl }}">{{ 'Back'|trans }}</a>
+                            </button>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </form>
 
-<pre style="background: #eee; border: 1px solid #666; padding: 1em; margin: .4em; overflow: scroll">
+        <pre style="background: #eee; border: 1px solid #666; padding: 1em; margin: .4em; overflow: scroll">
 
 {% for index, line in results %}
     {{ line|escape('html') }}
 {% endfor %}
 </pre>
+    {% else %}
+        {% if backUrl != '' %}
+            <button type="button"><a href="{{ backUrl }}" class="button">{{ 'Back'|trans }}</a></button>
+        {% endif %}
+    {% endif %}
 {% endblock %}
