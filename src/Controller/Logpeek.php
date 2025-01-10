@@ -7,6 +7,7 @@ namespace SimpleSAML\Module\logpeek\Controller;
 use Exception;
 use SimpleSAML\Assert\Assert;
 use SimpleSAML\Configuration;
+use SimpleSAML\Module\consent\Controller\ConsentController;
 use SimpleSAML\Module\logpeek\File;
 use SimpleSAML\Module\logpeek\Syslog;
 use SimpleSAML\Session;
@@ -54,13 +55,13 @@ class Logpeek
      * @throws \Exception
      */
     public function __construct(
-        Configuration $config,
-        Session $session,
+//        Configuration $config,
+//        Session $session,
     ) {
         $this->authUtils = new Utils\Auth();
-        $this->config = $config;
+        $this->config = Configuration::getConfig(); //$config;
         $this->moduleConfig = Configuration::getConfig('module_logpeek.php');
-        $this->session = $session;
+        $this->session = Session::getSession();
     }
 
 
