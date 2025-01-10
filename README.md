@@ -26,3 +26,14 @@ in `config.php`, search for the `module.enable` key and set `logpeek` to true:
 ```php
     'module.enable' => [ 'logpeek' => true, … ],
 ```
+
+
+Change log
+----------
+
+### 1.1 (2020-06-22)
+
+- Added authorization config parameters (see config-templates/module-logpeek.php)
+- Preserve last search tag
+- Detailed error display
+
