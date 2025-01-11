@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace SimpleSAML\Test\Module\logpeek\Controller;
 
-use Exception;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use SimpleSAML\Configuration;
@@ -39,7 +38,7 @@ class LogpeekTest extends TestCase
 
     /**
      * Set up for each test.
-     * @throws Exception
+     * @throws \Exception
      */
     protected function setUp(): void
     {
@@ -106,7 +105,7 @@ class LogpeekTest extends TestCase
 
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function testMain(): void
     {
@@ -123,7 +122,7 @@ class LogpeekTest extends TestCase
 
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function testMainWithTag(): void
     {
@@ -142,6 +141,7 @@ class LogpeekTest extends TestCase
 
 
     /**
+     * @throws \Exception
      */
     public function testMainWithInvalidTag(): void
     {
