@@ -56,7 +56,7 @@ class Logpeek
         $this->authUtils = new Auth();
         $this->config = Configuration::getConfig(); //$config;
         $this->moduleConfig = Configuration::getConfig('module_logpeek.php');
-        $this->session = Session::getSession();
+        $this->session = Session::getSession()??Session::getSessionFromRequest();;
 
         // Initialize authorization data
         $requireAdmin = $this->moduleConfig->getOptionalValue('requireAdmin', true);
