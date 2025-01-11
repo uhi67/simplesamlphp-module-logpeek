@@ -17,7 +17,7 @@
             "email": "uherkovich.peter@pte.hu"
         }
     ],
-    "license": "GNU LESSER GENERAL PUBLIC LICENSE",
+    "license": "LGPL-2.1-or-later",
     "autoload": {
         "psr-4": {
             "SimpleSAML\\Module\\logpeek\\": "src/"
