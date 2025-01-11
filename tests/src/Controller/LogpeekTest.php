@@ -84,6 +84,7 @@ class LogpeekTest extends TestCase
 
                     // Read block size. 8192 is max, limited by fread.
                     'blocksz' => 8192,
+                    'requireAdmin' => false, // default is true.
                 ],
                 '[ARRAY]',
                 'simplesaml',
