@@ -56,7 +56,7 @@ class Logpeek
         $this->authUtils = new Auth();
         $this->config = Configuration::getConfig(); //$config;
         $this->moduleConfig = Configuration::getConfig('module_logpeek.php');
-        $this->session = Session::getSession() ?? Session::getSessionFromRequest();;
+        $this->session = Session::getSession() ?? Session::getSessionFromRequest();
 
         // Initialize authorization data
         $requireAdmin = $this->moduleConfig->getOptionalValue('requireAdmin', true);
@@ -141,7 +141,6 @@ class Logpeek
 
             if (!preg_match('/^[a-f0-9]{10}$/D', $tag)) {
                 $error = 'Invalid search tag! Search tag must be exactly 10 characters long hexadecimal number.';
-                $results = [];
             } else {
                 $results = $this->logFilter($myLog, $tag, $this->moduleConfig->getOptionalValue('lines', 500));
             }
