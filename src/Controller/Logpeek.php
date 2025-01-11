@@ -76,9 +76,9 @@ class Logpeek
             $requiredAttrs = $this->moduleConfig->getOptionalArray('requiredAttrs', []);
 
             foreach ($requiredAttrs as $name => $value) {
-                $attrValues = $attributes[$name] ?? array();
+                $attrValues = $attributes[$name] ?? [];
                 if (!is_array($attrValues)) {
-                    $attrValues = array($attrValues);
+                    $attrValues = [$attrValues];
                 }
                 $hasValue = false;
                 foreach ($attrValues as $av) {
@@ -141,7 +141,7 @@ class Logpeek
 
             if (!preg_match('/^[a-f0-9]{10}$/D', $tag)) {
                 $error = 'Invalid search tag! Search tag must be exactly 10 characters long hexadecimal number.';
-                $results = array();
+                $results = [];
             } else {
                 $results = $this->logFilter($myLog, $tag, $this->moduleConfig->getOptionalValue('lines', 500));
             }
