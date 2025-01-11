@@ -154,7 +154,7 @@ class LogpeekTest extends TestCase
         $c = new Controller\Logpeek();
         $c->setAuthUtils($this->authUtils);
 
-        $this->expectException(Exception::class);
-        $c->main($request);
+        $response = $c->main($request);
+        $this->assertTrue($response->isSuccessful());
     }
 }
