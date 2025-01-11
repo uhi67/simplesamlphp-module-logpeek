@@ -272,12 +272,12 @@ jobs:
           name: coverage-data
           path: ${{ github.workspace }}/build
 
-      - name: Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          fail_ci_if_error: true
-          verbose: true
+#      - name: Codecov
+#        uses: codecov/codecov-action@v5
+#        with:
+#          token: ${{ secrets.CODECOV_TOKEN }}
+#          fail_ci_if_error: true
+#          verbose: true
 
   cleanup:
     name: Cleanup artifacts
