@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 use SimpleSAML\Configuration;
 use SimpleSAML\Module\logpeek\Controller;
 use SimpleSAML\Session;
-use SimpleSAML\Utils;
+use SimpleSAML\Utils\Auth;
 use Symfony\Component\HttpFoundation\Request;
 
 use function dirname;
@@ -24,14 +24,14 @@ use function unlink;
 #[CoversClass(Controller\Logpeek::class)]
 class LogpeekTest extends TestCase
 {
-    /** @var \SimpleSAML\Configuration */
+    /** @var Configuration */
     protected Configuration $config;
 
-    /** @var \SimpleSAML\Session */
+    /** @var Session */
     protected Session $session;
 
-    /** @var \SimpleSAML\Utils\Auth */
-    protected Utils\Auth $authUtils;
+    /** @var Auth */
+    protected Auth $authUtils;
 
     /** @var string */
     protected string $tmpfile;
@@ -39,6 +39,7 @@ class LogpeekTest extends TestCase
 
     /**
      * Set up for each test.
+     * @throws Exception
      */
     protected function setUp(): void
     {
@@ -68,7 +69,7 @@ class LogpeekTest extends TestCase
             ],
         );
 
-        $this->authUtils = new class () extends Utils\Auth {
+        $this->authUtils = new class () extends Auth {
             public function requireAdmin(): void
             {
                 // stub
@@ -88,7 +89,6 @@ class LogpeekTest extends TestCase
                 'simplesaml',
             ),
             'module_logpeek.php',
-            'simplesaml',
         );
     }
 
@@ -105,15 +105,15 @@ class LogpeekTest extends TestCase
 
 
     /**
+     * @throws Exception
      */
     public function testMain(): void
     {
         $request = Request::create(
             '/',
-            'GET',
         );
 
-        $c = new Controller\Logpeek($this->config, $this->session);
+        $c = new Controller\Logpeek();
         $c->setAuthUtils($this->authUtils);
         $response = $c->main($request);
 
@@ -122,6 +122,7 @@ class LogpeekTest extends TestCase
 
 
     /**
+     * @throws Exception
      */
     public function testMainWithTag(): void
     {
@@ -131,7 +132,7 @@ class LogpeekTest extends TestCase
             ['tag' => $this->session->getTrackID()],
         );
 
-        $c = new Controller\Logpeek($this->config, $this->session);
+        $c = new Controller\Logpeek();
         $c->setAuthUtils($this->authUtils);
         $response = $c->main($request);
 
@@ -149,7 +150,7 @@ class LogpeekTest extends TestCase
             ['tag' => 'WRONG'],
         );
 
-        $c = new Controller\Logpeek($this->config, $this->session);
+        $c = new Controller\Logpeek();
         $c->setAuthUtils($this->authUtils);
 
         $this->expectException(Exception::class);
