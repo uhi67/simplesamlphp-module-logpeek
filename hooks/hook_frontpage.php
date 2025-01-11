@@ -15,9 +15,7 @@ function logpeek_hook_frontpage(array &$links): void
     assert('array_key_exists("links", $links)');
 
     $links['config'][] = [
-        'href' => class_exists('SimpleSAML_Module', false) ? SimpleSAML_Module::getModuleURL(
-            'logpeek/'
-        ) : Module::getModuleURL('logpeek/'),
+        'href' => Module::getModuleURL('logpeek/'),
         'text' => ['en' => 'SimpleSAMLphp logs access (Log peek)', 'no' => 'Vis simpleSAMLphp log'],
     ];
 }
