@@ -54,7 +54,7 @@ class Logpeek
     public function __construct()
     {
         $this->authUtils = new Auth();
-        $this->config = Configuration::getConfig(); //$config;
+        $this->config = Configuration::getInstance();
         $this->moduleConfig = Configuration::getConfig('module_logpeek.php');
         $this->session = Session::getSession() ?? Session::getSessionFromRequest();
 
@@ -121,8 +121,6 @@ class Logpeek
      */
     public function main(Request $request): Template
     {
-        $this->authUtils->requireAdmin();
-
         $logfile = $this->moduleConfig->getOptionalValue('logfile', '/var/log/simplesamlphp.log');
         $blockSize = $this->moduleConfig->getOptionalValue('blocksz', 8192);
 
