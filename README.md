@@ -33,13 +33,13 @@ in `config.php`, search for the `module.enable` key and set `logpeek` to true:
 Change log
 ----------
 
-*1.2 (2025-01-11)*
+1.2 (2025-01-11)
 
 - SimpleSAMLphp 2.3 compatibility
 - Back button and `backurl` config option added;
 - translations (hu);
 
-*1.1 (2020-06-22)*
+1.1 (2020-06-22)
 
 - Added authorization config parameters (see config-templates/module-logpeek.php)
 - Preserve last search tag
