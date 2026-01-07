@@ -1,3 +1,9 @@
+msgid "Log peek"
+msgstr "Log peek"
+
+msgid "SimpleSAMLphp logs (admin utility)"
+msgstr "SimpleSAMLphp logs (admin utility)"
+
 msgid "Not authorized."
 msgstr "Not authorized."
 
@@ -21,3 +27,9 @@ msgstr "Tag id for search"
 
 msgid "Back"
 msgstr "Back"
+
+msgid "Search log"
+msgstr "Search log"
+
+msgid "SimpleSAMLphp logs access (Log peek)"
+msgstr "SimpleSAMLphp logs access (Log peek)"

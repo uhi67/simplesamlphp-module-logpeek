@@ -1,3 +1,9 @@
+msgid "Log peek"
+msgstr "Naplókivonat"
+
+msgid "SimpleSAMLphp logs (admin utility)"
+msgstr "Keresés a SimpleSAMLphp naplófájlban (üzemeltetői segédeszköz)"
+
 msgid "Not authorized."
 msgstr "A funkció használatához nincs joga."
 
@@ -22,3 +28,8 @@ msgstr "Naplófájl mérete"
 msgid "Back"
 msgstr "Vissza"
 
+msgid "Search log"
+msgstr "Keress!"
+
+msgid "SimpleSAMLphp logs access (Log peek)"
+msgstr "Naplókivonat (Log peek)"

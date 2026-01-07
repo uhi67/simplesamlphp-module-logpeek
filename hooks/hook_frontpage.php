@@ -16,6 +16,6 @@ function logpeek_hook_frontpage(array &$links): void
 
     $links['config'][] = [
         'href' => Module::getModuleURL('logpeek/'),
-        'text' => ['en' => 'SimpleSAMLphp logs access (Log peek)', 'no' => 'Vis simpleSAMLphp log'],
+        'text' => ['en' => 'SimpleSAMLphp logs access (Log peek)', 'no' => 'Vis simpleSAMLphp log', 'hu'=>'Naplókivonat (Log peek)'],
     ];
 }

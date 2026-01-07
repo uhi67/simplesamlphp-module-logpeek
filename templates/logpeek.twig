@@ -2,7 +2,9 @@
 {% extends "base.twig" %}
 
 {% block content %}
-    <h2>SimpleSAMLphp logs (admin utility)</h2>
+    <link rel="stylesheet" href="{{ asset("css/default.css", 'logpeek') }}">
+
+    <h2>{{ 'SimpleSAMLphp logs (admin utility)' | trans }} </h2>
 
     {% if error!='' %}
         <div class="alert alert-danger">{{ error|trans }}</div>
@@ -33,7 +35,7 @@
                 <tr>
                     <th></th>
                     <td>
-                        <input type="submit" class="btn btn-primary" value="Search log"/>
+                        <input type="submit" class="btn btn-primary" value="{{ 'Search log' | trans }}"/>
                         {% if backUrl != '' %}
                             <button type="button" class="btn btn-dark"><a href="{{ backUrl }}">{{ 'Back'|trans }}</a>
                             </button>
@@ -43,12 +45,8 @@
             </table>
         </form>
 
-        <pre style="background: #eee; border: 1px solid #666; padding: 1em; margin: .4em; overflow: scroll">
-
-{% for index, line in results %}
-    {{ line|escape('html') }}
-{% endfor %}
-</pre>
+        <pre class="logpeek-content">{% for index, line in results %}{{ line|escape('html') }}
+{% endfor %}</pre>
     {% else %}
         {% if backUrl != '' %}
             <button type="button"><a href="{{ backUrl }}" class="button">{{ 'Back'|trans }}</a></button>
