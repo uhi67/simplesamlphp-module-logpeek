@@ -22,7 +22,7 @@ vendor/bin/composer require simplesamlphp/simplesamlphp-module-logpeek
 Configuration
 -------------
 
-Next thing you need to do is to enable the module:
+The next thing you need to do is to enable the module:
 
 in `config.php`, search for the `module.enable` key and set `logpeek` to true:
 
@@ -30,8 +30,15 @@ in `config.php`, search for the `module.enable` key and set `logpeek` to true:
     'module.enable' => [ 'logpeek' => true, … ],
 ```
 
+Copy the configuration template from the module `config/module_logpeek.php.dist` to the main config directory as `module_logpeek.php` and adjust it to your needs.
+
 Change log
 ----------
+
+1.2.1 (2026-01-07)
+
+- Added CSS class to log entries
+- Added Hungarian translations
 
 1.2 (2025-01-11)
 
